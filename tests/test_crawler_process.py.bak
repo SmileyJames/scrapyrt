@@ -43,4 +43,4 @@ class CralwerProcessTestCase(unittest.TestCase):
             crawler.signals.send_catch_log(
                 signal=getattr(signals, signal), spider=crawler.spider)
             handler_mock = getattr(crawl_manager, handler)
-            self.assertEqual(handler_mock.call_count, 1)
+            self.assertEquals(handler_mock.call_count, 1)

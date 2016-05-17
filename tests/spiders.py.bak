@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from scrapy import Spider, Request
-import collections
 
 
 class MetaSpider(Spider):
@@ -31,12 +30,12 @@ class SingleRequestSpider(MetaSpider):
 
     def parse(self, response):
         self.meta.setdefault('responses', []).append(response)
-        if isinstance(self.callback_func, collections.Callable):
+        if callable(self.callback_func):
             return self.callback_func(response)
         if 'next' in response.meta:
             return response.meta['next']
 
     def on_error(self, failure):
         self.meta['failure'] = failure
-        if isinstance(self.errback_func, collections.Callable):
+        if callable(self.errback_func):
             return self.errback_func(failure)

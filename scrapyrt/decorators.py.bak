@@ -3,7 +3,6 @@ from functools import wraps
 import warnings
 
 from .exceptions import ScrapyrtDeprecationWarning
-import collections
 
 
 def deprecated(use_instead=None):
@@ -26,7 +25,7 @@ def deprecated(use_instead=None):
 
         return wrapped
 
-    if isinstance(use_instead, collections.Callable):
+    if callable(use_instead):
         deco = deco(use_instead)
         use_instead = None
     return deco

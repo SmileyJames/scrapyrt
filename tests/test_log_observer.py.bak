@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import io
+import StringIO
 
 from mock import patch
 from twisted.python.log import startLoggingWithObserver, removeObserver
@@ -12,7 +12,7 @@ from scrapyrt.log import ScrapyrtFileLogObserver, msg
 class TestLogObserver(unittest.TestCase):
 
     def setUp(self):
-        self.file = io.StringIO()
+        self.file = StringIO.StringIO()
         self.log_observer = ScrapyrtFileLogObserver(self.file)
         startLoggingWithObserver(self.log_observer.emit, setStdout=False)
         self.event_dict = {'system': 'scrapyrt', 'message': 'blah'}
@@ -40,7 +40,7 @@ class TestLogObserver(unittest.TestCase):
         self.assertTrue(emit_mock.called)
 
     def test_unicode_message(self, emit_mock):
-        original_message = 'Привет, мир!'
+        original_message = u'Привет, мир!'
         msg(original_message)
         transformed_message = emit_mock.call_args[0][1]['message'][0]
         self.assertEqual(transformed_message, original_message.encode('utf-8'))

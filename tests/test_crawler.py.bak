@@ -41,7 +41,7 @@ class TestCrawler(unittest.TestCase):
         stats = self.crawler.stats.get_stats()
         self.assertIn('start_time', stats)
         self.assertIn('finish_time', stats)
-        self.assertEqual(stats['finish_reason'], 'finished')
+        self.assertEquals(stats['finish_reason'], 'finished')
 
     @defer.inlineCallbacks
     def test_crawl_start_requests_disabled(self):

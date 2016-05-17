@@ -177,7 +177,7 @@ class TestRenderObject(TestServiceResource):
         headers = dict(self.headers)
         self.assertIn('Access-Control-Allow-Methods', headers)
         self.assertEqual(headers['Access-Control-Allow-Methods'], '')
-        for key, value in self.obj.items():
+        for key, value in self.obj.iteritems():
             self.assertIn(key, result)
             self.assertIn(value, result)
 
@@ -187,7 +187,7 @@ class TestRenderObject(TestServiceResource):
         access_control_allow_methods = headers['Access-Control-Allow-Methods']
         self.assertEqual(
             self.resource.allowedMethods,
-            [s.strip() for s in access_control_allow_methods.split(',')]
+            map(lambda s: s.strip(), access_control_allow_methods.split(','))
         )
 
     def test_access_control_allow_methods_header_get(self):

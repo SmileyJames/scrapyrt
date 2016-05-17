@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from subprocess import Popen, PIPE
-from urllib.parse import urljoin
+from urlparse import urljoin
 import fcntl
 import os
 import shutil
@@ -53,7 +53,7 @@ class BaseTestServer(object):
         try:
             self._wait_for_port()
         finally:
-            print((self._non_block_read(self.proc.stderr)))
+            print(self._non_block_read(self.proc.stderr))
             pass
 
     def stop(self):

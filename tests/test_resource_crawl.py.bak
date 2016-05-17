@@ -50,7 +50,7 @@ class TestCrawlResourceIntegration(unittest.TestCase):
 
     def tearDown(self):
         if not self._passed:
-            print(self.server._non_block_read(self.server.proc.stderr))
+            print self.server._non_block_read(self.server.proc.stderr)
         self.server.stop()
         self.site.stop()
 
@@ -58,7 +58,7 @@ class TestCrawlResourceIntegration(unittest.TestCase):
         res = requests.get(self.crawl_url)
         assert res.status_code == 400
         res_json = res.json()
-        expected_result = {'status': 'error',  'code': 400}
+        expected_result = {u'status': u'error',  u'code': 400}
         self.assertDictContainsSubset(expected_result, res_json)
         assert 'url' in res_json['message']
 
@@ -71,8 +71,8 @@ class TestCrawlResourceIntegration(unittest.TestCase):
         )
         assert res.status_code == 400
         expected_result = {
-            'status': 'error',
-            'code': 400
+            u'status': u'error',
+            u'code': 400
         }
         res_json = res.json()
         self.assertDictContainsSubset(expected_result, res_json)
@@ -88,8 +88,8 @@ class TestCrawlResourceIntegration(unittest.TestCase):
         assert res.status_code == 400
         res_json = res.json()
         expected_result = {
-            'status': 'error',
-            'code': 400
+            u'status': u'error',
+            u'code': 400
         }
         self.assertDictContainsSubset(expected_result, res_json)
         assert 'spider_name' in res_json['message']
@@ -104,11 +104,11 @@ class TestCrawlResourceIntegration(unittest.TestCase):
         )
 
         expected_result = {
-            'status': 'ok',
-            'items_dropped': []
+            u'status': u'ok',
+            u'items_dropped': []
         }
         expected_items = [{
-            'name': ['Page 1'],
+            u'name': ['Page 1'],
         }]
         res_json = res.json()
         self.assertDictContainsSubset(expected_result, res_json)

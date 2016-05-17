@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from configparser import SafeConfigParser, NoOptionError, NoSectionError
+from ConfigParser import SafeConfigParser, NoOptionError, NoSectionError
 import argparse
 import os
 import sys
@@ -22,7 +22,7 @@ def parse_arguments():
         key, sep, value = string.partition('=')
         if not key or not sep:
             raise argparse.ArgumentTypeError(
-                'expected name=value: {}'.format(repr(string)))
+                u'expected name=value: {}'.format(repr(string)))
         return key, value
 
     parser = argparse.ArgumentParser(
